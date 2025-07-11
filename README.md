@@ -13,7 +13,8 @@ This is a **learning repository** for Garry's Mod Lua scripting basics.
 
 - 🔥 **Health Cycle System** - Learn timers and player manipulation
 - 🎮 **Custom Tab Menu** - Learn VGUI and client-server communication
-- 📚 **Detailed Documentation** - Step-by-step learning guides
+- � **Stats Board System** - Learn advanced VGUI and real-time data visualization
+- �📚 **Detailed Documentation** - Step-by-step learning guides
 
 ## 🚀 Installation
 

@@ -26,11 +26,13 @@ Garrysmod_RP/
 ├── addon.txt                          # Addon information
 ├── docs/                              # Documentation for each script
 │   ├── health-cycle.md               # Health cycling script docs
-│   └── custom-tab-menu.md            # Custom tab menu script docs
+│   ├── custom-tab-menu.md            # Custom tab menu script docs
+│   └── stats-board.md                # Stats board system docs
 └── lua/
     └── autorun/
         ├── client/
-        │   └── cl_custom_tab_menu.lua    # Client-side tab menu
+        │   ├── cl_custom_tab_menu.lua    # Client-side tab menu
+        │   └── cl_stats_board.lua        # Real-time statistics board
         └── server/
             ├── sv_health_cycle.lua       # Server-side health cycling
             └── sv_custom_tab_menu.lua    # Server-side tab menu handler
@@ -49,6 +51,12 @@ Garrysmod_RP/
 - **Purpose:** Learn VGUI creation and client-server communication
 - **Features:** Custom UI, button interactions, network messaging
 - **Documentation:** [docs/custom-tab-menu.md](docs/custom-tab-menu.md)
+
+### 3. **Stats Board System**
+- **Files:** `cl_stats_board.lua`
+- **Purpose:** Learn advanced VGUI and real-time data visualization
+- **Features:** Real-time player stats, server info, customizable keybinds, scroll panels
+- **Documentation:** [docs/stats-board.md](docs/stats-board.md)
 
 ## 🚀 Installation
 
@@ -74,7 +82,28 @@ Garrysmod_RP/
    - Event handling
 
 ### **Advanced Level:**
-3. Combine concepts to create your own scripts!
+3. Master the [Stats Board documentation](docs/stats-board.md) to learn:
+- Complex VGUI layouts and scroll panels
+- Real-time data processing and updates
+- Performance optimization techniques
+- Advanced visual design concepts
+- Dynamic content management
+- Customizable keybind systems
+
+### **Expert Level:**
+4. Combine concepts to create your own scripts!
+
+## 🎮 Console Commands
+
+### Health Cycle System
+- `health_cycle_start <player>` - Start health cycle for a player (Admin)
+- `health_cycle_stop <player>` - Stop health cycle for a player (Admin)
+- `health_cycle_status` - Show current health cycle status
+
+### Stats Board System
+- `toggle_stats` - Toggle the stats board on/off
+- `stats_keybind <key>` - Change the stats board keybind
+- `stats_help` - Show available stats board commands
 
 ## 🔗 Useful Resources
 

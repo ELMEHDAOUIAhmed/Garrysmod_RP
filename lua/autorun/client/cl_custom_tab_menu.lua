@@ -11,15 +11,15 @@ if CLIENT then
     local tabMenu = nil
     local isMenuOpen = false
     
-    -- Colors for the UI (improved visibility)
+    -- Colors for the UI (black buttons with white text)
     local colors = {
-        background = Color(45, 45, 55, 240),      -- Darker blue-gray with more opacity
-        button = Color(70, 85, 100, 255),         -- Blue-gray buttons for better contrast
-        buttonHover = Color(90, 115, 140, 255),   -- Brighter blue on hover
+        background = Color(25, 25, 30, 240),      -- Dark background
+        button = Color(15, 15, 20, 255),          -- Black buttons
         buttonText = Color(255, 255, 255, 255),   -- Pure white text
         title = Color(120, 180, 255, 255),        -- Bright blue title
-        titleBar = Color(25, 30, 40, 255),        -- Dark title bar background
-        border = Color(120, 140, 160, 150)       -- Subtle border color
+        titleBar = Color(20, 20, 25, 255),        -- Very dark title bar
+        border = Color(60, 60, 70, 150),          -- Subtle border
+        closeButton = Color(40, 15, 15, 255)      -- Dark red for close
     }
     
     -- Function to create the tab menu
@@ -30,7 +30,7 @@ if CLIENT then
         
         -- Main frame
         tabMenu = vgui.Create("DFrame")
-        tabMenu:SetSize(300, 250)
+        tabMenu:SetSize(300, 300)  -- Increased height for new button
         tabMenu:Center()
         tabMenu:SetTitle("")
         tabMenu:SetDraggable(false)
@@ -40,34 +40,30 @@ if CLIENT then
         
         -- Custom paint function for the frame
         tabMenu.Paint = function(self, w, h)
-            -- Background with subtle border
+            -- Background
             draw.RoundedBox(8, 0, 0, w, h, colors.background)
-            draw.RoundedBox(8, 1, 1, w-2, h-2, Color(0, 0, 0, 0)) -- Inner border effect
             
-            -- Title bar with gradient effect
+            -- Title bar
             draw.RoundedBoxEx(8, 0, 0, w, 35, colors.titleBar, true, true, false, false)
-            draw.RoundedBoxEx(0, 0, 30, w, 5, Color(colors.titleBar.r + 15, colors.titleBar.g + 15, colors.titleBar.b + 15, 100), false, false, false, false)
             
-            -- Title text with shadow effect
-            draw.SimpleText("Custom Menu", "DermaDefaultBold", w/2 + 1, 18, Color(0, 0, 0, 100), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER) -- Shadow
-            draw.SimpleText("Custom Menu", "DermaDefaultBold", w/2, 17, colors.title, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER) -- Main text
+            -- Title text
+            draw.SimpleText("Custom Menu", "DermaDefaultBold", w/2, 17, colors.title, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+            
+            -- Border
+            surface.SetDrawColor(colors.border)
+            surface.DrawOutlinedRect(0, 0, w, h)
         end
         
         -- Kill button
         local killButton = vgui.Create("DButton", tabMenu)
-        killButton:SetText("💀 Kill Yourself")
+        killButton:SetText("Kill Yourself")
         killButton:SetPos(25, 60)
         killButton:SetSize(250, 40)
         killButton:SetFont("DermaDefaultBold")
+        killButton:SetTextColor(colors.buttonText)
         
         killButton.Paint = function(self, w, h)
-            local bgColor = self:IsHovered() and colors.buttonHover or colors.button
-            
-            -- Button background with subtle gradient
-            draw.RoundedBox(6, 0, 0, w, h, bgColor)
-            draw.RoundedBox(6, 1, 1, w-2, h/2, Color(bgColor.r + 20, bgColor.g + 20, bgColor.b + 20, 80)) -- Top highlight
-            
-            -- Border with improved visibility
+            draw.RoundedBox(6, 0, 0, w, h, colors.button)
             surface.SetDrawColor(colors.border)
             surface.DrawOutlinedRect(0, 0, w, h)
         end
@@ -81,19 +77,14 @@ if CLIENT then
         
         -- Think button
         local thinkButton = vgui.Create("DButton", tabMenu)
-        thinkButton:SetText("🤔 Think")
+        thinkButton:SetText("Think")
         thinkButton:SetPos(25, 110)
         thinkButton:SetSize(250, 40)
         thinkButton:SetFont("DermaDefaultBold")
+        thinkButton:SetTextColor(colors.buttonText)
         
         thinkButton.Paint = function(self, w, h)
-            local bgColor = self:IsHovered() and colors.buttonHover or colors.button
-            
-            -- Button background with subtle gradient
-            draw.RoundedBox(6, 0, 0, w, h, bgColor)
-            draw.RoundedBox(6, 1, 1, w-2, h/2, Color(bgColor.r + 20, bgColor.g + 20, bgColor.b + 20, 80)) -- Top highlight
-            
-            -- Border with improved visibility
+            draw.RoundedBox(6, 0, 0, w, h, colors.button)
             surface.SetDrawColor(colors.border)
             surface.DrawOutlinedRect(0, 0, w, h)
         end
@@ -101,14 +92,14 @@ if CLIENT then
         thinkButton.DoClick = function()
             -- Random thinking messages
             local thinkMessages = {
-                "🤔 Hmm, what should I do next?",
-                "💭 Thinking about life...",
-                "🧠 Processing thoughts...",
-                "💡 Maybe I should explore more...",
-                "🤯 So many possibilities...",
-                "🎯 Planning my next move...",
-                "🌟 Dreaming of adventures...",
-                "⚡ Ideas are flowing..."
+                "Hmm, what should I do next?",
+                "Thinking about life...",
+                "Processing thoughts...",
+                "Maybe I should explore more...",
+                "So many possibilities...",
+                "Planning my next move...",
+                "Dreaming of adventures...",
+                "Ideas are flowing..."
             }
             
             local randomMessage = thinkMessages[math.random(#thinkMessages)]
@@ -118,19 +109,14 @@ if CLIENT then
         
         -- Dance button (extra fun feature)
         local danceButton = vgui.Create("DButton", tabMenu)
-        danceButton:SetText("💃 Dance")
+        danceButton:SetText("Dance")
         danceButton:SetPos(25, 160)
         danceButton:SetSize(250, 40)
         danceButton:SetFont("DermaDefaultBold")
+        danceButton:SetTextColor(colors.buttonText)
         
         danceButton.Paint = function(self, w, h)
-            local bgColor = self:IsHovered() and colors.buttonHover or colors.button
-            
-            -- Button background with subtle gradient
-            draw.RoundedBox(6, 0, 0, w, h, bgColor)
-            draw.RoundedBox(6, 1, 1, w-2, h/2, Color(bgColor.r + 20, bgColor.g + 20, bgColor.b + 20, 80)) -- Top highlight
-            
-            -- Border with improved visibility
+            draw.RoundedBox(6, 0, 0, w, h, colors.button)
             surface.SetDrawColor(colors.border)
             surface.DrawOutlinedRect(0, 0, w, h)
         end
@@ -140,25 +126,40 @@ if CLIENT then
             net.Start("CustomMenu_Dance")
             net.SendToServer()
             CloseTabMenu()
-            chat.AddText(Color(255, 200, 100), "[Dance] ", Color(255, 255, 255), "You're dancing! 💃🕺")
+            chat.AddText(Color(255, 200, 100), "[Dance] ", Color(255, 255, 255), "You're dancing!")
+        end
+        
+        -- Stats Board button (NEW!)
+        local statsButton = vgui.Create("DButton", tabMenu)
+        statsButton:SetText("Toggle Stats Board")
+        statsButton:SetPos(25, 210)
+        statsButton:SetSize(250, 40)
+        statsButton:SetFont("DermaDefaultBold")
+        statsButton:SetTextColor(colors.buttonText)
+        
+        statsButton.Paint = function(self, w, h)
+            draw.RoundedBox(6, 0, 0, w, h, colors.button)
+            surface.SetDrawColor(colors.border)
+            surface.DrawOutlinedRect(0, 0, w, h)
+        end
+        
+        statsButton.DoClick = function()
+            ToggleStatsBoard()  -- Function from stats board script
+            CloseTabMenu()
+            chat.AddText(Color(100, 255, 200), "[Stats Board] ", Color(255, 255, 255), "Stats board toggled!")
         end
         
         -- Close button
         local closeButton = vgui.Create("DButton", tabMenu)
-        closeButton:SetText("❌ Close")
-        closeButton:SetPos(25, 210)
+        closeButton:SetText("Close")
+        closeButton:SetPos(25, 260)
         closeButton:SetSize(250, 25)
         closeButton:SetFont("DermaDefault")
+        closeButton:SetTextColor(colors.buttonText)
         
         closeButton.Paint = function(self, w, h)
-            local bgColor = self:IsHovered() and Color(180, 70, 70, 255) or Color(120, 50, 50, 255)
-            
-            -- Close button with red theme and gradient
-            draw.RoundedBox(4, 0, 0, w, h, bgColor)
-            draw.RoundedBox(4, 1, 1, w-2, h/2, Color(bgColor.r + 30, bgColor.g + 15, bgColor.b + 15, 60)) -- Top highlight
-            
-            -- Border
-            surface.SetDrawColor(Color(bgColor.r + 40, bgColor.g + 20, bgColor.b + 20, 150))
+            draw.RoundedBox(4, 0, 0, w, h, colors.closeButton)
+            surface.SetDrawColor(Color(100, 30, 30))
             surface.DrawOutlinedRect(0, 0, w, h)
         end
         
@@ -202,13 +203,6 @@ if CLIENT then
             CloseTabMenu()
         end
     end)
-    
-    -- Network message for dance
-    if not net.Receivers["CustomMenu_Dance"] then
-        net.Receive("CustomMenu_Dance", function()
-            -- This will be handled by the server
-        end)
-    end
     
     print("[Custom Tab Menu] Client script loaded successfully!")
 end
