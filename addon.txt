@@ -1,0 +1,11 @@
+"AddonInfo"
+{
+	"name"			"Random Useless Scripts"
+	"version"		"1.0"
+	"up_date"		"11 Jul, 2025"
+	"author_name"	"ELMEHDAOUI Ahmed"
+	"author_email"	""
+	"author_url"	"https://github.com/ELMEHDAOUIAhmed"
+	"info"			"A simple health cycling script that lowers player health every second and resets to 100 when it reaches 1"
+	"override"		"0"
+}
